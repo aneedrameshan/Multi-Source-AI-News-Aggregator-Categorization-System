@@ -1,0 +1,530 @@
+{
+  "name": "SSG Sample work",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return items.slice(0,5);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        -368
+      ],
+      "id": "cf1cbd28-d7e2-4086-8397-45f01040ac05",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        272
+      ],
+      "id": "06ec4914-b2a9-4cae-8c29-08f9f7c76edb",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "cbvRQ7Y9ou7rLejJ",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "articles",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{$json.title}}"
+            },
+            {
+              "fieldId": "url",
+              "fieldValue": "={{ $json.link }}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "={{ $json.source }}"
+            },
+            {
+              "fieldId": "category",
+              "fieldValue": "={{ $json.output.category }}"
+            },
+            {
+              "fieldId": "summary",
+              "fieldValue": "={{ $json.output.summary }}"
+            },
+            {
+              "fieldId": "published_at",
+              "fieldValue": "={{ $json.pubDate }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        -80
+      ],
+      "id": "d8a9f1df-1c2c-48c8-9e81-96b7a1c1f8d1",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "PWFKHckkzXNi7UIp",
+          "name": "Supabase account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://venturebeat.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        208
+      ],
+      "id": "058d91f5-e41e-4401-a884-46885478fe7f",
+      "name": "VentureBeat"
+    },
+    {
+      "parameters": {
+        "url": "https://www.theverge.com/rss/index.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        -176
+      ],
+      "id": "4280f708-d13b-4d4b-ae44-3c885328b1cc",
+      "name": "The Verge"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.slice(0,5);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        16
+      ],
+      "id": "55bcca9e-e6f2-4f43-9860-b7884f664343",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.slice(0,5);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        208
+      ],
+      "id": "1c474680-d1b7-40c0-b46c-5918f4b02165",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.slice(0,5);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        -176
+      ],
+      "id": "0052c2f8-f3d7-4e9c-8243-08d96471fb5b",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "url": "https://techcrunch.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        -368
+      ],
+      "id": "6688191e-9710-498a-8210-cc08a7c17b7a",
+      "name": "Techcrunch"
+    },
+    {
+      "parameters": {
+        "numberInputs": 5
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        672,
+        -128
+      ],
+      "id": "6c3e525e-0fbf-4dec-8d6f-73af1a38634a",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "https://www.zdnet.com/news/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        16
+      ],
+      "id": "b8b5b825-61d4-4a16-bfd0-d42631bac379",
+      "name": "zdnet"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf94ec38-09b6-44a0-a8c7-0d639c0925c0",
+              "name": "title",
+              "value": "={{$json.title}}",
+              "type": "string"
+            },
+            {
+              "id": "e15153df-4ad0-40c3-affa-855fee0b17cb",
+              "name": "content",
+              "value": "={{$json.content}}",
+              "type": "string"
+            },
+            {
+              "id": "9f2b71b8-df9e-4f99-8c52-d7f83f909345",
+              "name": "link",
+              "value": "={{$json.link}}",
+              "type": "string"
+            },
+            {
+              "id": "2689429c-2dcf-40f3-be5b-633c6eb46d72",
+              "name": "pubDate",
+              "value": "={{$json.pubDate}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        -80
+      ],
+      "id": "48894a6b-95a8-4c9d-8ecd-9a8ea7e95ac3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Categorize the article into one category:\n- AI\n- Cybersecurity\n- Startups\n- Cloud\n- Data\n- Consumer Tech\n- Enterprise\n- Robotics\n- Gaming\n- Other\n\nCreate a concise 2-3 sentence summary.\n\nThe response must conform to the attached structured output schema.\n\nArticle Title:\n{{$json.title}}\n\nArticle Content:\n{{$json.content}}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1120,
+        48
+      ],
+      "id": "1726b243-f992-4004-b259-6f6abec48da0",
+      "name": "Summary + Category + agent"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"category\": \"AI\",\n  \"summary\": [\n    \"Sentence 1\",\n    \"Sentence 2\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1264,
+        272
+      ],
+      "id": "84a7c9fa-78d8-4244-b8ed-61fd6f63b629",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1472,
+        -80
+      ],
+      "id": "fbd0d3e9-e59b-4aaf-bfa0-8b626c59390a",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const url = $json.link;\n\nlet source = \"Unknown\";\n\nif (url.includes(\"techcrunch\")) {\n  source = \"TechCrunch\";\n} else if (url.includes(\"theverge\")) {\n  source = \"The Verge\";\n} else if (url.includes(\"venturebeat\")) {\n  source = \"VentureBeat\";\n} else if (url.includes(\"zdnet\")) {\n  source = \"ZDNet\";\n}\n\nreturn {\n  ...$json,\n  source\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1696,
+        -80
+      ],
+      "id": "853ff4e1-c2ae-4a0b-a8c9-959c5da18d01",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -48,
+        -48
+      ],
+      "id": "38a7aa17-d9f5-4ca6-a48c-82afcfedd9dc",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summary + Category + agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        []
+      ]
+    },
+    "The Verge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VentureBeat": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Techcrunch": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "zdnet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Summary + Category + agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summary + Category + agent": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Summary + Category + agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "VentureBeat",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "zdnet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "The Verge",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Techcrunch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "eafaee2a-451a-4e9f-90dc-ee3b4a9d118c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3fdd86562c4322b868c053a58b23d6f77bbe2b813ed0ba4abb5e5ef664ed718e"
+  },
+  "id": "fjiFCnMFtTu7llvG",
+  "tags": []
+}
